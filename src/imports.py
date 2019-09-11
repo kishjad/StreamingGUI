@@ -1,10 +1,16 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 import sys
+
+import resources
 
 Widgets = ['QPushButton', 
                 'QWidget', 
                 'QMessageBox', 
                 'QApplication',
-                'QMainWindow']
+                'QMainWindow',
+                'QAction','qApp']
 
 for libs in Widgets:
     try:
