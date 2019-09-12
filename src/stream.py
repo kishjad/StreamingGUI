@@ -10,7 +10,7 @@ import resources
 #from selenium import webdriver
 import webbrowser
 from PyQt5.QtCore import pyqtSlot
-Widgets = [' QHBoxLayout', 'QGroupBox', 'QDialog', 'QVBoxLayout',
+Widgets = [' QHBoxLayout', 'QGroupBox', 'QDialog', 'QVBoxLayout','QSizePolicy',
     'QPushButton','QWidget','QMessageBox','QApplication','QMainWindow','QAction','qApp','QToolTip','QGridLayout']
 
 for libs in Widgets:
@@ -32,10 +32,10 @@ class Streamer(QDialog):
     
     def __init__(self):
         super().__init__()
-        self.left = 10
-        self.top = 10
-        self.width = 320
-        self.height = 100
+        self.left = 40
+        self.top = 50
+        self.width = 200        
+        self.height = 300
         self.title = 'Streamer v1.0'
         self.initUI()
         
@@ -51,28 +51,28 @@ class Streamer(QDialog):
         self.setLayout(windowLayout)
         
         self.show()
-
-        # self.setLayout(grid)
-        # self.setGeometry(300, 300, 350, 300)
-        # self.setWindowTitle('Streamer v1.0')
-        # self.show()
     
     def createGridLayout(self):
         self.horizontalGroupBox = QGroupBox("Available Services")
         layout = QGridLayout()
-        layout.setColumnStretch(1, 4)
-        layout.setColumnStretch(2, 4)
+        # layout.setColumnStretch(1, 5)
+        # layout.setColumnStretch(1, 5)
+
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         netflixButton = QPushButton(QIcon(':/myicons/netflix.png'),'',self)
         netflixButton.setToolTip('<b>NetFlix</b>')
         # netflixButton.resize(netflixButton.sizeHint())
         netflixButton.clicked.connect(self.netflixPressed)    
+        netflixButton.setSizePolicy(sizePolicy)
         layout.addWidget(netflixButton,1,0)
 
         huluButton = QPushButton(QIcon(':/myicons/hulu.png'),'',self)
         huluButton.setToolTip('<b>Hulu</b>')
         huluButton.clicked.connect(self.huluPressed)    
+        huluButton.setSizePolicy(sizePolicy)
         layout.addWidget(huluButton,2,0)     
+
 
         self.horizontalGroupBox.setLayout(layout)
         
@@ -82,12 +82,13 @@ class Streamer(QDialog):
 
     def huluPressed(self):
         sender = self.sender()
-        webbrowser.open('http://hulu.com/')
+        webbrowser.open_new_tab('http://hulu.com/')
+        
         
     
     def netflixPressed(self):
         sender = self.sender()
-        webbrowser.open('http://netlflix.com/')
+        webbrowser.open_new_tab('http://netlflix.com/')
         
     # def closeEvent(self, event):
         
