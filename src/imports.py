@@ -10,7 +10,8 @@ Widgets = ['QPushButton',
                 'QMessageBox', 
                 'QApplication',
                 'QMainWindow',
-                'QAction','qApp']
+                'QAction','qApp',
+                'QToolTip']
 
 for libs in Widgets:
     try:
