@@ -9,7 +9,7 @@ import sys
 import resources
 #from selenium import webdriver
 import webbrowser
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSlot, QSize
 Widgets = [' QHBoxLayout', 'QGroupBox', 'QDialog', 'QVBoxLayout','QSizePolicy',
     'QPushButton','QWidget','QMessageBox','QApplication','QMainWindow','QAction','qApp','QToolTip','QGridLayout']
 
@@ -19,7 +19,7 @@ for libs in Widgets:
     except Exception as e:
         print (e)
 
-Gui = ['QIcon' ,'QFont']
+Gui = ['QIcon' ,'QFont', 'QPixmap']
 
 for libs in Gui:
     try:
@@ -34,8 +34,8 @@ class Streamer(QDialog):
         super().__init__()
         self.left = 40
         self.top = 50
-        self.width = 200        
-        self.height = 300
+        self.width = 400        
+        self.height = 400
         self.title = 'Streamer v1.0'
         self.initUI()
         
@@ -55,41 +55,68 @@ class Streamer(QDialog):
     def createGridLayout(self):
         self.horizontalGroupBox = QGroupBox("Available Services")
         layout = QGridLayout()
-        # layout.setColumnStretch(1, 5)
-        # layout.setColumnStretch(1, 5)
-
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        netflixButton = QPushButton(QIcon(':/myicons/netflix.png'),'',self)
+        netflixButton = QPushButton('')
+        netflixPix = QPixmap(':/myicons/netflix.png')
+        netflixIcon = QIcon(netflixPix)
+        netflixButton.setIcon(netflixIcon)
+        netflixButton.setIconSize(netflixPix.rect().size())
         netflixButton.setToolTip('<b>NetFlix</b>')
-        # netflixButton.resize(netflixButton.sizeHint())
         netflixButton.clicked.connect(self.netflixPressed)    
         netflixButton.setSizePolicy(sizePolicy)
         layout.addWidget(netflixButton,1,0)
 
-        huluButton = QPushButton(QIcon(':/myicons/hulu.png'),'',self)
+        huluButton = QPushButton('')
+        huluPix = QPixmap(':/myicons/hulu.png')
+        huluIcon = QIcon(huluPix)
+        huluButton.setIcon(huluIcon)
+        huluButton.setIconSize(huluPix.rect().size())
         huluButton.setToolTip('<b>Hulu</b>')
         huluButton.clicked.connect(self.huluPressed)    
         huluButton.setSizePolicy(sizePolicy)
         layout.addWidget(huluButton,2,0)     
 
+        youtubeButton = QPushButton('')
+        youtubePix = QPixmap(':/myicons/youtube.png')
+        youtubeIcon = QIcon(youtubePix)
+        youtubeButton.setIcon(youtubeIcon)
+        youtubeButton.setIconSize(youtubePix.rect().size())
+        youtubeButton.setToolTip('<b>Youtube</b>')
+        youtubeButton.clicked.connect(self.youtubePressed)    
+        youtubeButton.setSizePolicy(sizePolicy)
+        layout.addWidget(youtubeButton,1,1)     
+
+        primeButton = QPushButton('')
+        primePix = QPixmap(':/myicons/prime.png')
+        primeIcon = QIcon(primePix)
+        primeButton.setIcon(primeIcon)
+        primeButton.setIconSize(primePix.rect().size())
+        primeButton.setToolTip('<b>Prime</b>')
+        primeButton.clicked.connect(self.primePressed)    
+        primeButton.setSizePolicy(sizePolicy)
+        layout.addWidget(primeButton,2,1)     
 
         self.horizontalGroupBox.setLayout(layout)
         
-    ''' 
-    layout = [N , H , Y]
-    '''
 
     def huluPressed(self):
         sender = self.sender()
-        webbrowser.open_new_tab('http://hulu.com/')
+        webbrowser.open_new_tab('https://www.hulu.com/')
         
-        
-    
+
     def netflixPressed(self):
         sender = self.sender()
-        webbrowser.open_new_tab('http://netlflix.com/')
-        
+        webbrowser.open_new_tab('https://www.netlflix.com/')
+
+    def primePressed(self):
+        sender = self.sender()
+        webbrowser.open_new_tab('https://www.primevideo.com')
+
+    def youtubePressed(self):
+        sender = self.sender()
+        webbrowser.open_new_tab('https://www.youtube.com/')    
+
     # def closeEvent(self, event):
         
     #     reply = QMessageBox.question(self, 'Message',
